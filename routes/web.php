@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RoleController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware'=>'auth'], function(){
+
+    Route::get('/',[DashboardController::class,'index'])->name('dashboard');
+
+    Route::group(['prefix'=>'/user'  , 'as'=>'user.'],function(){
+
+        Route::get('/',[UsersController::class,'index'])->name('index');
+        Route::get('/create',[UsersController::class,'create'])->name('create');
+        Route::post('/store',[UsersController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[UsersController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[UsersController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[UsersController::class,'delete'])->name('delete');
+
+    });
+
+});
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
