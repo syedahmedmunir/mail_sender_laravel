@@ -41,7 +41,7 @@
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     <a href="{{ route('user.edit',$user->id) }}"> <i class="fas fa-edit" title="Edit"></i></a>
-                                    <a href="{{ route('user.delete',$user->id) }}"> <i  class="fas fa-trash" title="Delete"></i></a>
+                                    {{-- <a href="{{ route('user.delete',$user->id) }}"> <i  class="fas fa-trash" title="Delete"></i></a> --}}
                                 </td>
 
                                

@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\MailSenderController;
 
 
 /*
@@ -33,6 +32,13 @@ Route::group(['middleware'=>'auth'], function(){
         Route::get('/edit/{id}',[UsersController::class,'edit'])->name('edit');
         Route::post('/update/{id}',[UsersController::class,'update'])->name('update');
         Route::get('/delete/{id}',[UsersController::class,'delete'])->name('delete');
+
+    });
+
+       Route::group(['prefix'=>'/mail_sender'  , 'as'=>'mail_sender.'],function(){
+
+        Route::get('/',[MailSenderController::class,'index'])->name('index');
+        Route::post('/send',[MailSenderController::class,'send'])->name('send');
 
     });
 

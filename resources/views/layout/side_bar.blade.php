@@ -47,6 +47,12 @@
           {{-- USERS END --}}
 
           
+            <li class="nav-item">
+            <a class="nav-link collapsed {{ activeRoute('mail_sender.index') }}" href="{{ route('mail_sender.index') }}" >
+              <i class="bi bi-grid"></i>
+              <span>Mail Sender</span>
+            </a>
+          </li> 
 
 
         </ul>

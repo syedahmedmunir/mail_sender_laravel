@@ -31,7 +31,7 @@ class UsersController extends Controller
         $request->validate([
             'name'          => 'required',
             'password'      => 'required',
-            'role_id'       => 'required',
+            // 'role_id'       => 'required',
             'email'         => 'required|unique:users,email'
 
         ]);
@@ -67,7 +67,7 @@ class UsersController extends Controller
 
         $request->validate([
             'name'          => 'required',
-            'role_id'       => 'required',
+            // 'role_id'       => 'required',
             'email'         => 'required|unique:users,email,'.$user->id
 
         ]);
@@ -81,11 +81,7 @@ class UsersController extends Controller
 
         $user->update();
 
-        $role = Role::find($request->role_id);
-        $role->syncPermissions($role->permissions);
-
-        $assign_role = $user->assignRole($role);
-
+        
         DB::commit();
 
         return redirect()->route('user.index')->with('success','User Updated Successfully');
